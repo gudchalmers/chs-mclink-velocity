@@ -28,13 +28,13 @@ The default config looks like this:
 
 ```toml
 mclink_backend = "https://auth.mc.chs.se/"
-auth_server = "auth"
+ignored_servers = ["auth"]
 permission = "velocity.command.server"
 token = ""
 ```
 
 - `mclink_backend` is the base url to the backend server running [gudchalmers/chs-mclink-backend][3].
-- `auth_server` is the server to ignore connections to as it's the one running [gudchalmers/chs-mclink][1] to auth players.
+- `ignored_servers` a list of servers to ignore connections to, needed for the one running [gudchalmers/chs-mclink][1] to auth players.
 - `permission` if the player have this permission they bypass the auth check.
 - `token` is the shared key from [gudchalmers/chs-mclink-backend][3] to auth the api.
 

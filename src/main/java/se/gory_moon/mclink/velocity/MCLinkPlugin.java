@@ -22,6 +22,7 @@ import se.gory_moon.mclink.velocity.commands.MCLinkCommand;
 import se.gory_moon.mclink.velocity.commands.UnregisterCommand;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 
 @Plugin(id = "mclink", name = "MCLink Plugin", version = "1.0.0",
@@ -32,7 +33,7 @@ public class MCLinkPlugin extends AbstractModule {
 
     public final ProxyServer server;
     private final Logger logger;
-    public RegisteredServer authServer;
+    public List<String> ignoreServers;
     public final Gate gate;
     public Config config;
     public API api;
@@ -62,7 +63,7 @@ public class MCLinkPlugin extends AbstractModule {
         server.getChannelRegistrar().register(CONNECT_CHANNEL);
         api = new API(config);
 
-        authServer = server.getServer(config.getAuthServer()).orElseThrow(NoServerFoundExecption::new);
+        ignoreServers = config.getIgnoredServers();
     }
 
     @Subscribe
@@ -94,7 +95,7 @@ public class MCLinkPlugin extends AbstractModule {
 
     @Subscribe
     public void playerConnect(ServerPreConnectEvent event) {
-        if (!authServer.getServerInfo().getName().equals(event.getOriginalServer().getServerInfo().getName())) {
+        if (!ignoreServers.contains(event.getOriginalServer().getServerInfo().getName())) {
             gate.login(event.getPlayer());
         }
     }

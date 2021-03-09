@@ -8,6 +8,7 @@ import com.velocitypowered.api.command.CommandManager;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ServerConnection;
+import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.slf4j.Logger;
@@ -15,7 +16,6 @@ import se.gory_moon.mclink.velocity.Gate;
 import se.gory_moon.mclink.velocity.MCLinkPlugin;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
@@ -41,12 +41,12 @@ public class UnregisterCommand {
 
                     boolean send = false;
                     Optional<ServerConnection> server = ((Player) source).getCurrentServer();
-                    if (server.isPresent() && !Objects.equals(server.get().getServerInfo().getName(), plugin.config.getAuthServer())) {
+                    if (server.isPresent() && !plugin.config.getIgnoredServers().contains(server.get().getServerInfo().getName())) {
                         send = true;
-                        msg.append(Component.newline().append(Component.text("Redirecting you in 5 seconds...", NamedTextColor.YELLOW)));
+                        msg = msg.append(Component.newline().append(Component.text("Disconnecting you in 5 seconds...", NamedTextColor.YELLOW)));
                     }
 
-                    source.sendMessage(msg);
+                    source.sendMessage(Identity.nil(), msg);
                     if (send) {
                         plugin.server.getScheduler().buildTask(plugin, () -> {
                             if (((Player) source).isActive()) {

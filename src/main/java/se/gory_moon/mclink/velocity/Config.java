@@ -1,10 +1,12 @@
 package se.gory_moon.mclink.velocity;
 
+import com.google.common.collect.Lists;
 import com.moandjiezana.toml.Toml;
 import com.moandjiezana.toml.TomlWriter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class Config {
 
@@ -48,8 +50,8 @@ public class Config {
         return toml.getString("mclink_backend");
     }
 
-    public String getAuthServer() {
-        return toml.getString("auth_server");
+    public List<String> getIgnoredServers() {
+        return toml.getList("ignored_servers");
     }
 
     public String getToken() {
@@ -64,9 +66,10 @@ public class Config {
         load();
     }
 
+    @SuppressWarnings("unused")
     static class ConfigDefaults {
         String mclink_backend = "https://auth.mc.chs.se/";
-        String auth_server = "auth";
+        List<String> ignored_servers = Lists.newArrayList("auth");
         String permission = "velocity.command.server";
         String token = "";
     }
