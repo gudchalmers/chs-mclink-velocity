@@ -51,7 +51,7 @@ public class UnregisterCommand {
                         plugin.server.getScheduler().buildTask(plugin, () -> {
                             if (((Player) source).isActive()) {
                                 ((Player) source).disconnect(Component.text("You need to register your account before you can join. Login to ", NamedTextColor.RED)
-                                        .append(Component.text("auth.mc.chs.se", NamedTextColor.GOLD)));
+                                        .append(Component.text("mc.chs.se", NamedTextColor.GOLD)));
                             }
                         }).delay(5, TimeUnit.SECONDS).schedule();
                     }

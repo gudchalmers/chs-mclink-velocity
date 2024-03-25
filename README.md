@@ -27,7 +27,7 @@ Once the plugin have run once a config file have been created in `velocity_insta
 The default config looks like this:
 
 ```toml
-mclink_backend = "https://auth.mc.chs.se/"
+mclink_backend = "https://mc.chs.se/"
 ignored_servers = ["auth"]
 permission = "velocity.command.server"
 token = ""

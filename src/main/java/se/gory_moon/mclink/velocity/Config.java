@@ -68,7 +68,7 @@ public class Config {
 
     @SuppressWarnings("unused")
     static class ConfigDefaults {
-        String mclink_backend = "https://auth.mc.chs.se/";
+        String mclink_backend = "https://mc.chs.se/";
         List<String> ignored_servers = Lists.newArrayList("auth");
         String permission = "velocity.command.server";
         String token = "";
