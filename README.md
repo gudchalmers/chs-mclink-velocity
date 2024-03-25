@@ -6,6 +6,8 @@ This is the plugin that authenticates players as they login against [gudchalmers
 
 - An instance of [gudchalmers/chs-mclink-backend][1] running
 - An instance of [Velocity 1.1.0+][2] to run the plugin on
+- Java 11
+- Gradle 6
 
 ## Setup
 
